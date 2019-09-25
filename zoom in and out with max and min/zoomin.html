@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<title>Title</title>
+<script src="jquery-3.4.1.min.js"></script>
+<style>
+img{
+ width: 200px;
+ height: 200px;      
+ margin: 100px;
+ max-width: 300px;
+ min-width: 100px;
+ max-height: 300px;
+ min-height: 100px;
+}</style>
+</head>
+<body>
+    <button id="btnzoomin">Zoom in</button>
+    <button id="btnzoomout">Zoom Out</button>
+    <p>
+        <img src="download.jpg">
+    </p>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam sequi perferendis accusantium sunt, quam quae quidem excepturi nemo enim nam, adipisci ducimus quia unde vel quasi ad amet ipsam? Enim.</p>
+    <script>
+    $('#btnzoomin').click(function(){
+        $("img").animate({
+            width:"+=20px",
+            height:"+=20px"
+        });
+    });
+
+    $('#btnzoomout').click(function(){
+        $("img").animate({
+            width:"-=20px",
+            height:"-=20px"
+        });
+    });
+
+    
+    </script>
+
+
+</body>
+</html>
