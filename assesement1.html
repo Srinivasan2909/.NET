@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<title>Registration form</title>
+<style>
+    .form-group{
+        color: blue;
+        background-color: black;
+        padding: 10px;
+        
+    }
+    .regform{
+        border: 1px solid black;
+        margin-left: 30%;
+        margin-right: 40%;
+        margin-bottom: 10%;
+        background-color: yellow;
+    }
+    label{
+        color: blueviolet;
+
+    }
+    
+</style>
+</head>
+<body>
+    <script>
+        function login()
+        {
+       
+        var a=document.getElementById("uid").value;
+        var b=document.getElementById("pass").value;
+        var c=document.getElementById("conpass").value;
+        var d=document.getElementById("dates").value;
+        var e=d.split('-');
+        if(e[0]>"2001"){
+            alert("Please fill the form only when you are 18");
+
+        }
+     
+        
+     
+     else if(a.length<5 || a.length>15) 
+     {
+         alert("Minimum 5 characters and maximum 15 characters required for user ID")
+     }
+     else if(b!=c)
+     {
+         alert("Password and confirm password do not match")
+     }
+     else
+     {
+       alert("Submitted successfully")
+     }
+
+    
+        }
+        </script>
+        <div class="regform">
+            <form method="POST" action="javascript:login()">
+                <h3>Resgistration form</h3>
+                <div class="form-group">
+                  <label for="uid">User id:</label>
+                  <input type="text" name="userid" id="uid" class="form-control" placeholder="Required and must be of 5 to 12 characters" aria-describedby="helpId" required>
+                  <small id="helpId" class="text-muted"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="pass">Password</label>
+                  <input type="password" class="form-control" name="password" id="pass" placeholder="" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,12}$">
+                <small>Min7,max12,one uppercase,one lowercase,one number,one special character</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="conpass">Re-enter password</label>
+                  <input type="password" class="form-control" name="confirmpass" id="conpass" placeholder="" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,12}$">
+                <small>Min7,max12,one uppercase,one lowercase,one number,one special character</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="name">Name:</label>
+                  <input type="text" name="names" id="name" class="form-control" placeholder="Required and alphabets only" aria-describedby="helpId" required pattern="^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{3,20}$">
+                  <small id="helpId" class="text-muted"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="address">Address:</label>
+                  <input type="text" name="address" id="address" class="form-control" placeholder="Optional" aria-describedby="helpId">
+                  <small id="helpId" class="text-muted"></small>
+                </div>
+
+               <div class="form-group">
+                <select>
+                    <option>Country</option>
+                    <option>India</option>
+                    <option>Pakistan</option>
+                    <option>China</option>
+                    <option>Korea</option>
+                    <option>England</option>
+                </select>
+               </div>
+                            
+                        
+               
+                
+                <div class="form-group">
+                        <label for="num">ZIP code:</label>
+                        <input type="number" name="number" id="num" class="form-control"
+                         placeholder="Enter your ZIP code" aria-describedby="helpId" required pattern="^(?=.*\d)[\d]{1,12}$">
+                        <small id="helpId" class="text-muted">Required and must be numeric only:</small>
+                      </div>
+
+                      <div class="form-group">
+                            <label for="email">Email ID:</label>
+                            <input type="text" name="emailid" id="email" class="form-control" placeholder="Enter your email id:" aria-describedby="helpId" pattern="^(?=.*[a-z])(?=.*[@])(?=.*[.])[a-z@.]{6,15}$" required>
+                            <small id="helpId" class="text-muted">'@','.' is necessary and must be 6-15 characters</small>
+                          </div>
+
+                        <h6>Sex:</h6>  
+                       <div class="form-check">
+                           <label class="form-check-label">
+                           <input type="radio" class="form-check-input" name="male" id="male" value="checkedValue" required>
+                           Male
+                         </label>
+                         <br>
+                         <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="male" id="female" value="checkedValue">
+                                Female
+                              </label>
+                       </div>
+                       <br>
+                       
+
+                       
+
+                       
+                       <h6>Language:</h6>
+                       <div class="form-check">
+                         <label class="form-check-label">
+                           <input type="checkbox" class="form-check-input" name="english" id="eng" value="checkedValue">
+                           English
+                         </label>
+                         <br>
+
+                         <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" name="tamil" id="tam" value="checkedValue" >
+                                Tamil
+                              </label>
+                              <br>
+
+                              <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="hindi" id="hindi" value="checkedValue">
+                                    Hindi
+                                  </label>
+                                  <br>
+
+                                  <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="sanskrit" id="sanskrit" value="checkedValue">
+                                        Sanskrit
+                                      </label>
+                       </div>
+
+                       <div class="form-group">
+                         <label for="message">About:</label>
+                         <textarea class="form-control" name="message" id="message" rows="3"></textarea>
+                       </div>
+
+                       <div class="form-group">
+                            <label for="date">Date of birth:</label>
+                            <input type="date" name="dates" id="dates" class="form-control" placeholder="Enter date of birth" aria-describedby="helpId" min="01-01-2000" max="01-01-1928">
+                            <small id="helpId" class="text-muted">Minimum 18 years</small>
+                          </div> 
+
+                          <div class="form-group">
+                                <label for="num">Phone number:</label>
+                                <input type="text" name="number" id="num" class="form-control"
+                                 placeholder="Enter your phone number" aria-describedby="helpId" pattern="[6789]{1}[0-9]{9}"/>
+                                <small id="helpId" class="text-muted"></small>
+                              </div>
+                          
+
+                       <button type="submit" class="btn btn-primary" >Submit</button>
+
+
+            </form>
+        </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
