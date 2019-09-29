@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<title>Title</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+        function add1(){
+            var tablee=document.getElementById("tid");
+            var rowz=tablee.insertRow();
+            var a=rowz.insertCell(0);
+            var b=rowz.insertCell(1);
+            var c=rowz.insertCell(2);
+            var d=rowz.insertCell(3);
+            a.innerHTML=document.getElementById("item").value;
+            b.innerHTML=document.getElementById("itemname").value;
+            c.innerHTML=document.getElementById("qty").value;
+            d.innerHTML=document.getElementById("prc").value;
+
+        }
+        function qdelete(){
+            var tbl=document.getElementById("tid");
+        var r=tbl.rows.length;
+        document.getElementById("tid").deleteRow(r-1);
+
+        }
+        
+        
+        document.write(`<table id='tid' class="tcl" style="border: 2px solid black; background-color='white';">
+            <thead id="th" class="hii" style="border: 1px solid black;">
+                <tr class="food">
+                    <th>Item no</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            
+            </thead>
+            <tbody id="tb" class="panel-collapse">
+                <tr class="food">
+                    <td>1</td>
+                    <td>Chilli beef</td>
+                    <td>2</td>
+                    <td>90</td>
+                </tr> 
+                <tr class="food">
+                        <td>2</td>
+                        <td>Fried rice</td>
+                        <td>4</td>
+                        <td>100</td>
+                    </tr>
+                    <tr class="food">
+                            <td>3</td>
+                            <td>beef biryani</td>
+                            <td>5</td>
+                            <td>80</td>
+                        </tr>
+                        <tr class="food">
+                                <td>4</td>
+                                <td>Paneer rice</td>
+                                <td>3</td>
+                                <td>100</td>
+                            </tr>
+                            <tr class="food">
+                                    <td>5</td>
+                                    <td>Dosa</td>
+                                    <td>2</td>
+                                    <td>40</td>
+                                </tr>
+                
+                
+
+            </tbody>`)
+            document.write(`<form>
+                <div>
+                  <label for="item">Item No</label>
+                  <input type="number" name="" id="item" >
+                </div>
+
+                <div >
+                  <label for="itemname">Item name</label>
+                  <input type="text" name="" id="itemname" >
+                </div>
+
+                <div >
+                  <label for="qty">Quantity</label>
+                  <input type="number" name="" id="qty" >
+                </div>
+
+                <div>
+                  <label for="prc">Price</label>
+                  <input type="number" name="" id="prc" >
+                </div>
+
+                <button type="button" class="btn btn-primary" onclick="add1()" value='Add'></button>
+                <button type="submit" class="btn" onclick="qdelete()">Delete row</button>
+                <button type="submit" class="btn2">Toogle</button>
+            </form>`)
+            </script>
+</head>
+<body>
+
+
+
+</body>
+</html>
