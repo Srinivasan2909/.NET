@@ -1,0 +1,61 @@
+<div class="container">
+    <table class="table table-dark table-bordered">
+      <tr>
+        <th>Departement NO</th>
+        <th>Name</th>
+        <th>Groupname</th>
+        <th>Modified date</th>
+      </tr>
+      <tbody>
+      
+         
+          <tr *ngFor="let qwe of deplist; let i = index">
+              <td>{{qwe.depno}}</td>
+              <td>{{qwe.name}}</td>
+              <td>{{qwe.groupname}}</td>
+              <td>{{qwe.modifieddate | date:short}}</td>
+              <td><button type="submit" class="btn btn-primary" (click)="deletes(i)">Delete</button></td>
+              <td><button type="submit" class="btn btn-primary" (click)="edits(i)">Edit</button></td>
+              
+              
+          </tr>
+        
+      
+      </tbody>
+    </table>
+    
+  </div>
+
+  <div *ngIf=ed>
+    <form>
+      <div class="form-group">
+        <label for="dno">Departement No:</label>
+        <input type="number" class="form-control" name="dno" id="dno" [(ngModel)]="ll.depno">
+        
+      </div>
+      <br>
+      <br>
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" id="name" [(ngModel)]="ll.name">
+      </div>
+      <br>
+
+      <label for="groupnamee">GroupName:</label>
+      <input type="text" name="groupnamee" id="groupnamee" class="form-control" [(ngModel)]="ll.groupname">
+      <br>
+      <br>
+      <div class="form-group">
+        <label for="dates">Modified Date:</label>
+        <input type="date" class="form-control" name="dates" id="dates" [(ngModel)]="ll.modifieddate">
+        <button type="submit" (click)="up()">Update</button>
+      </div>
+      <br>
+      <br>
+
+      
+      
+  </form>
+  </div>
+

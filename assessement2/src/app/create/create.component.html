@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<title>Title</title>
+</head>
+<body>
+  <div class="container">
+       
+    <form class="form-group">
+        <div class="form-group">
+          <label for="dno">Department Number:</label>
+          <input type="number" class="form-control" name="dno" id="dno" [(ngModel)]="dep1.depno">
+          
+        </div>
+        <br>
+        <br>
+
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" name="name" id="name" [(ngModel)]="dep1.name">
+        </div>
+        <br>
+
+        <label for="groupname">Groupname:</label>
+        <input type="text" name="groupname" id="groupname" class="form-control" [(ngModel)]="dep1.groupname">
+        <br>
+        <br>
+        <div class="form-group">
+          <label for="dates">Modified date:</label>
+          <input type="date" class="form-control" name="dates" id="dates" [(ngModel)]="dep1.modifieddate">
+        </div>
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-primary" (click)="dispdata()">Submit</button>
+        
+    </form>
+    </div>
+    
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
