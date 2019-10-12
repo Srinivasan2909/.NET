@@ -131,6 +131,43 @@ where a.customer_number=c.customer_number and
 day(account_opening_date) > 15 order by account_number
 
 --answer4
+select c.customer_number,firstname, a.account_number from customer_master c,account_master a
+where a.customer_number=c.customer_number and account_status='TERMINATED'
+order by customer_number
+
+select c.customer_number,firstname, a.account_number from customer_master c
+join account_master a 
+on a.customer_number=c.customer_number
+where account_status='TERMINATED'
+
+
+--answer5
+select count(t.transcation_type) as total, t.transcation_type as trans_count from transcation_details t join account_master a
+on t.account_number=a.account_number
+where a.customer_number like '%001'
+group by t.transcation_type
+
+select count(t.transcation_type) as total, t.transcation_type as trans_count from transcation_details t,account_master a
+where t.account_number=a.account_number and a.customer_number like '%001'
+group by t.transcation_type
+
+--answer6
+select count(customer_number) as Count_Customer from customer_master where customer_number not in
+(select customer_number from account_master)
+
+--answer7
+select account_number , sum(transcation_amount ) as Deposit_Amount
+from transcation_details
+where transcation_type='DEPOSIT'
+group by account_number
+order by account_number
+
+select account_number , sum(transcation_amount ) as Deposit_Amount
+from transcation_details
+where transcation_details.transcation_type='DEPOSIT'
+group by transcation_details.account_number
+order by transcation_details.account_number
+select * from transcation_details
 
 
 
