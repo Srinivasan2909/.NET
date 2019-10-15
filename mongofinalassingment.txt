@@ -1,0 +1,265 @@
+2019-10-15T19:15:48.140+0530 W  -        [main] Failed to adjust token privilege for privilege 'SeIncreaseWorkingSetPrivilege'
+MongoDB shell version v4.2.0
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("460bb6cb-088b-487e-9a7f-7b8cbd6dfbba") }
+MongoDB server version: 4.2.0
+Server has startup warnings:
+2019-10-14T13:57:58.965+0530 I  CONTROL  [initandlisten]
+2019-10-14T13:57:58.965+0530 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2019-10-14T13:57:58.965+0530 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2019-10-14T13:57:58.966+0530 I  CONTROL  [initandlisten]
+MongoDB Enterprise > show dbs
+admin   0.000GB
+config  0.000GB
+dxc     0.000GB
+local   0.000GB
+qwe     0.000GB
+test    0.000GB
+MongoDB Enterprise > use qwe
+switched to db qwe
+MongoDB Enterprise > db.Lists.find().pretty()
+{
+        "_id" : 1,
+        "item" : {
+                "name" : "ab",
+                "code" : "123"
+        },
+        "qty" : 15,
+        "tags" : [
+                "A",
+                "B",
+                "C"
+        ]
+}
+{
+        "_id" : 2,
+        "item" : {
+                "name" : "cd",
+                "code" : "123"
+        },
+        "qty" : 20,
+        "tags" : [
+                "B"
+        ]
+}
+{
+        "_id" : 3,
+        "item" : {
+                "name" : "ij",
+                "code" : "456"
+        },
+        "qty" : 25,
+        "tags" : [
+                "A",
+                "B"
+        ]
+}
+{
+        "_id" : 4,
+        "item" : {
+                "name" : "xy",
+                "code" : "456"
+        },
+        "qty" : 30,
+        "tags" : [
+                "B",
+                "A"
+        ]
+}
+{
+        "_id" : 5,
+        "item" : {
+                "name" : "mn",
+                "code" : "000"
+        },
+        "qty" : 20,
+        "tags" : [
+                [
+                        "A",
+                        "B"
+                ],
+                "C"
+        ]
+}
+MongoDB Enterprise >
+MongoDB Enterprise > db.Lists.find({qty:{$gte:20}})
+{ "_id" : 2, "item" : { "name" : "cd", "code" : "123" }, "qty" : 20, "tags" : [ "B" ] }
+{ "_id" : 3, "item" : { "name" : "ij", "code" : "456" }, "qty" : 25, "tags" : [ "A", "B" ] }
+{ "_id" : 4, "item" : { "name" : "xy", "code" : "456" }, "qty" : 30, "tags" : [ "B", "A" ] }
+{ "_id" : 5, "item" : { "name" : "mn", "code" : "000" }, "qty" : 20, "tags" : [ [ "A", "B" ], "C" ] }
+MongoDB Enterprise > db.Lists.find({"item.name":"mn","ab"})
+2019-10-15T19:19:50.135+0530 E  QUERY    [js] uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:36
+MongoDB Enterprise > db.Lists.find({{item.name:{$in:["mn","ab","ij"]}}}).pretty()
+2019-10-15T19:57:13.062+0530 E  QUERY    [js] uncaught exception: SyntaxError: expected property name, got '{' :
+@(shell):1:15
+MongoDB Enterprise > db.Lists.find({item.name:{$in:["mn","ab","ij"]}}).pretty()
+2019-10-15T19:59:45.734+0530 E  QUERY    [js] uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:19
+MongoDB Enterprise > db.Lists.find({$in:[{item.name:["mn","ab","ij"]}]})
+2019-10-15T20:02:20.950+0530 E  QUERY    [js] uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:25
+MongoDB Enterprise > db.Lists.find({$in:[{"item.name":["mn","ab","ij"]}]})
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "unknown top level operator: $in",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+MongoDB Enterprise > db.Lists.find({"item.name":{$in:["mn","ab","ij"]}}).pretty()
+{
+        "_id" : 1,
+        "item" : {
+                "name" : "ab",
+                "code" : "123"
+        },
+        "qty" : 15,
+        "tags" : [
+                "A",
+                "B",
+                "C"
+        ]
+}
+{
+        "_id" : 3,
+        "item" : {
+                "name" : "ij",
+                "code" : "456"
+        },
+        "qty" : 25,
+        "tags" : [
+                "A",
+                "B"
+        ]
+}
+{
+        "_id" : 5,
+        "item" : {
+                "name" : "mn",
+                "code" : "000"
+        },
+        "qty" : 20,
+        "tags" : [
+                [
+                        "A",
+                        "B"
+                ],
+                "C"
+        ]
+}
+MongoDB Enterprise > db.Lists.find({$in:[{"item.name":["mn","ab","ij"]}]},{qty:{$gte:20}})
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "unknown top level operator: $in",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+MongoDB Enterprise > db.Lists.find({{$in:[{"item.name":["mn","ab","ij"]}]},{qty:{$gte:20}}})
+2019-10-15T20:15:44.648+0530 E  QUERY    [js] uncaught exception: SyntaxError: expected property name, got '{' :
+@(shell):1:15
+MongoDB Enterprise > db.Lists.find({$in:[{"item.name":["mn","ab","ij"]}]},{qty:{$gte:20}})
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "unknown top level operator: $in",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+MongoDB Enterprise > db.Lists.find({"item.name":{$in:["mn","ab","ij"]}}).pretty()
+{
+        "_id" : 1,
+        "item" : {
+                "name" : "ab",
+                "code" : "123"
+        },
+        "qty" : 15,
+        "tags" : [
+                "A",
+                "B",
+                "C"
+        ]
+}
+{
+        "_id" : 3,
+        "item" : {
+                "name" : "ij",
+                "code" : "456"
+        },
+        "qty" : 25,
+        "tags" : [
+                "A",
+                "B"
+        ]
+}
+{
+        "_id" : 5,
+        "item" : {
+                "name" : "mn",
+                "code" : "000"
+        },
+        "qty" : 20,
+        "tags" : [
+                [
+                        "A",
+                        "B"
+                ],
+                "C"
+        ]
+}
+MongoDB Enterprise > db.Lists.find({qty:{$gte:20}},{"item.name":{$in:["mn","ab","ij"]}}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "Unsupported projection option: item.name: { $in: [ \"mn\", \"ab\", \"ij\" ] }",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+MongoDB Enterprise > db.Lists.find({{qty:{$gte:20}},{"item.name":{$in:["mn","ab","ij"]}}}).pretty()
+2019-10-15T20:18:20.108+0530 E  QUERY    [js] uncaught exception: SyntaxError: expected property name, got '{' :
+@(shell):1:15
+MongoDB Enterprise > db.Lists.find({qty:{$gte:20}},{"item.name":{$in:["mn","ab","ij"]}}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "Unsupported projection option: item.name: { $in: [ \"mn\", \"ab\", \"ij\" ] }",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+MongoDB Enterprise > 0
+0
+MongoDB Enterprise > db.Lists.find(({qty:{$gte:20}}),{"item.name":{$in:["mn","ab","ij"]}}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "Unsupported projection option: item.name: { $in: [ \"mn\", \"ab\", \"ij\" ] }",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+MongoDB Enterprise >
+MongoDB Enterprise >
+MongoDB Enterprise >
+MongoDB Enterprise > db.Lists.find({qty:{$gte:20},"item.name":{$in:["mn","ab","ij"]}}).pretty()
+{
+        "_id" : 3,
+        "item" : {
+                "name" : "ij",
+                "code" : "456"
+        },
+        "qty" : 25,
+        "tags" : [
+                "A",
+                "B"
+        ]
+}
+{
+        "_id" : 5,
+        "item" : {
+                "name" : "mn",
+                "code" : "000"
+        },
+        "qty" : 20,
+        "tags" : [
+                [
+                        "A",
+                        "B"
+                ],
+                "C"
+        ]
+}
+MongoDB Enterprise >
