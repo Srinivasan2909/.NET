@@ -1,0 +1,6 @@
+C:\Users\ssrinivas209\source\repos\day3assingment\bankrecord\bin\Debug\bankrecord.exe.config
+C:\Users\ssrinivas209\source\repos\day3assingment\bankrecord\bin\Debug\bankrecord.exe
+C:\Users\ssrinivas209\source\repos\day3assingment\bankrecord\bin\Debug\bankrecord.pdb
+C:\Users\ssrinivas209\source\repos\day3assingment\bankrecord\obj\Debug\bankrecord.csprojAssemblyReference.cache
+C:\Users\ssrinivas209\source\repos\day3assingment\bankrecord\obj\Debug\bankrecord.exe
+C:\Users\ssrinivas209\source\repos\day3assingment\bankrecord\obj\Debug\bankrecord.pdb
