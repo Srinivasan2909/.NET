@@ -1,0 +1,6 @@
+C:\Users\ssrinivas209\Desktop\c# demos\day5assingmentcsharp\employeeassingment\bin\Debug\employeeassingment.exe.config
+C:\Users\ssrinivas209\Desktop\c# demos\day5assingmentcsharp\employeeassingment\bin\Debug\employeeassingment.exe
+C:\Users\ssrinivas209\Desktop\c# demos\day5assingmentcsharp\employeeassingment\bin\Debug\employeeassingment.pdb
+C:\Users\ssrinivas209\Desktop\c# demos\day5assingmentcsharp\employeeassingment\obj\Debug\employeeassingment.csprojAssemblyReference.cache
+C:\Users\ssrinivas209\Desktop\c# demos\day5assingmentcsharp\employeeassingment\obj\Debug\employeeassingment.exe
+C:\Users\ssrinivas209\Desktop\c# demos\day5assingmentcsharp\employeeassingment\obj\Debug\employeeassingment.pdb
