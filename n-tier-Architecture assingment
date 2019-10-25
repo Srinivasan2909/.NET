@@ -1,0 +1,228 @@
+---------Employee.cs----------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
+
+namespace dataaccessLayer
+{
+    public class Employee
+    {
+        private int id;
+        private int salary;
+        private string name, location, gender;
+        
+
+        public int Id { get => id; set => id = value; }
+        public int Salary { get => salary; set => salary = value; }
+        public string Name { get => name; set => name = value; }
+        public string Location { get => location; set => location = value; }
+        public string Gender { get => gender; set => gender = value; }
+
+        SqlConnection con = new SqlConnection();
+        SqlCommand cmd = new SqlCommand();
+        string connstr = "data source=IN5CG9214YQ9;database=adodemo;integrated security=true";
+        public int insertnewemployee(Employee employee)
+        {
+            con.ConnectionString = connstr;
+            cmd.Connection = con;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "sp_InsertNewEmployee";
+            cmd.Parameters.AddWithValue("name", employee.Name);
+            cmd.Parameters.AddWithValue("gender", employee.Gender);
+            cmd.Parameters.AddWithValue("location", employee.Location);
+            cmd.Parameters.AddWithValue("salary", employee.Salary);
+            con.Open();
+            int rowcount = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowcount;
+        }
+        public int deleteemployee(Employee employee)
+        {
+            con.ConnectionString = connstr;
+            cmd.Connection = con;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "sp_deleteEmployeebyId";
+            cmd.Parameters.AddWithValue("id",employee.Id);
+            con.Open();
+            int rowcount1 = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowcount1;
+        }
+        public int updateemployee(Employee employee)
+        {
+            con.ConnectionString = connstr;
+            cmd.Connection = con;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "sp_updateEmployee";
+            cmd.Parameters.AddWithValue("id", employee.Id);
+            cmd.Parameters.AddWithValue("name", employee.Name);
+            cmd.Parameters.AddWithValue("gender", employee.Gender);
+            cmd.Parameters.AddWithValue("location", employee.Location);
+            cmd.Parameters.AddWithValue("salary", employee.Salary);
+            con.Open();
+            int a=cmd.ExecuteNonQuery();
+            con.Close();
+            return a ;
+        }
+        public void displayemployee(Employee employee)
+        {
+            con.ConnectionString = connstr;
+            cmd.Connection = con;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "sp_retrieveallEmployee";
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            Console.WriteLine("ID" + "\t" + "Name" + "\t" + "Gender" + "\t" + "Location" + "\t" + "Salary");
+            while (rdr.Read())
+            {
+                Console.WriteLine(rdr[0] + "\t" + rdr[1] + "\t" + rdr[2] + "\t" + rdr[3] + "\t" + rdr[4]);
+            }
+            con.Close();
+            Console.ReadLine();
+            
+        }
+        public void displayemployeebyid(Employee employee)
+        {
+            con.ConnectionString = connstr;
+            cmd.Connection = con;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            cmd.CommandText = "sp_RetrieveEmployebyId";
+            cmd.Parameters.AddWithValue("id", employee.Id);
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            Console.WriteLine("ID" + "\t" + "Name" + "\t" + "Gender" + "\t" + "Location" + "\t" + "Salary");
+            while (rdr.Read())
+            {
+                Console.WriteLine(rdr[0] + "\t" + rdr[1] + "\t" + rdr[2] + "\t" + rdr[3] + "\t" + rdr[4]);
+            }
+            con.Close();
+            Console.ReadLine();
+        }
+
+
+    }
+}
+
+------------program.cs----------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using dataaccessLayer;
+
+namespace adodemo
+{
+    class Program
+    {
+        Employee employee;
+        static void Main(string[] args)
+        {
+            Program p = new Program();
+            int a;
+        l1:
+            {
+                Console.WriteLine("Enter your choice 1-Display\n 2-Insert\n3-Update\n4-Delete\n5-Display by id");
+                a = Convert.ToInt32(Console.ReadLine());
+                switch (a)
+                {
+                    case 1:
+                        p.displayallemployeedetail();
+                        break;
+                    case 2:
+                        p.getemployeedetail();
+                        break;
+                    case 3:
+                        p.updateemployeedetail();
+                        break;
+                    case 4:
+                        p.deleteemployeedetail();
+                        break;
+                    case 5:
+                        p.displayemployeedetailbyid();
+                        break;
+                    default:
+                        Console.WriteLine("Wrong option");
+                        break;
+                }
+                string y;
+                Console.WriteLine("Do you want to continue?Press Y if yes,N to No");
+                y = Console.ReadLine();
+
+                if (y == "y" || y == "Y")
+                {
+                    goto l1;
+                }
+                else if (y == "N" || y == "n")
+                    Console.WriteLine("Bye");
+
+            }
+
+            
+            Console.ReadLine();
+        }
+        public void getemployeedetail()
+        {
+            Console.WriteLine("Enter the name,gender,location and salary");
+            Employee employee = new Employee();
+            employee.Name = Console.ReadLine();
+            employee.Gender = Console.ReadLine();
+            employee.Location = Console.ReadLine();
+            employee.Salary = int.Parse(Console.ReadLine());
+            int count=employee.insertnewemployee(employee);
+            if (count > 0)
+                Console.WriteLine("Record inserted successfully");
+            else
+                Console.WriteLine("Something went wrong");
+        }
+        public void deleteemployeedetail()
+        {
+            Console.WriteLine("Enter the id you want to delete");
+            Employee employee = new Employee();
+            employee.Id = int.Parse(Console.ReadLine());
+            int count1 = employee.deleteemployee(employee);
+            if (count1 > 0)
+                Console.WriteLine("Record deleted successfully");
+            else
+                Console.WriteLine("Something went wrong");
+
+        }
+        public void updateemployeedetail()
+        {
+            Console.WriteLine("Enter the ID you want to update");
+            Employee employee = new Employee();
+            employee.Id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the updated name,gender,location,salary");
+            employee.Name = Console.ReadLine();
+            employee.Gender = Console.ReadLine();
+            employee.Location = Console.ReadLine();
+            employee.Salary = Convert.ToInt32(Console.ReadLine());
+            int count = employee.updateemployee(employee);
+            if (count > 0)
+                Console.WriteLine("Record updated successfully");
+            else
+                Console.WriteLine("Something went wrong");
+
+        }
+        public void displayallemployeedetail()
+        {
+            Console.WriteLine("The data is:");
+            Employee employee = new Employee();
+             employee.displayemployee(employee);
+        }
+        public void displayemployeedetailbyid()
+        {
+            Console.WriteLine("Enter the ID you want to display");
+            Employee employee = new Employee();
+            employee.Id = int.Parse(Console.ReadLine());
+            Console.WriteLine("The data you wanted is\n");
+            employee.displayemployeebyid(employee);
+
+        }
+    }
+}
+
