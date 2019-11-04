@@ -1,0 +1,6 @@
+C:\Users\ssrinivas209\Desktop\c# demos\ADOAssesement\Customerpurchase\bin\Debug\Customerpurchase.exe.config
+C:\Users\ssrinivas209\Desktop\c# demos\ADOAssesement\Customerpurchase\bin\Debug\Customerpurchase.exe
+C:\Users\ssrinivas209\Desktop\c# demos\ADOAssesement\Customerpurchase\bin\Debug\Customerpurchase.pdb
+C:\Users\ssrinivas209\Desktop\c# demos\ADOAssesement\Customerpurchase\obj\Debug\Customerpurchase.csprojAssemblyReference.cache
+C:\Users\ssrinivas209\Desktop\c# demos\ADOAssesement\Customerpurchase\obj\Debug\Customerpurchase.exe
+C:\Users\ssrinivas209\Desktop\c# demos\ADOAssesement\Customerpurchase\obj\Debug\Customerpurchase.pdb
