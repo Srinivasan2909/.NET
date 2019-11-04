@@ -145,22 +145,20 @@ namespace Customerpurchase
             con.Open();
             object rdr2 = cmd2.ExecuteScalar();
             double total = (double)rdr2;
-
-            
             Console.WriteLine($"Total Bill = {total}");
             con.Close();
 
             Console.WriteLine("Your shopping today was:\n");
             SqlCommand cmd6 = new SqlCommand();
             cmd6.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd6.CommandText = "sp_disp_finals";
-            cmd6.Parameters.AddWithValue("@qq", custo.Name);
+            cmd6.CommandText = "sp_dis";
+            cmd6.Parameters.AddWithValue("@cid", cid);
             cmd6.Connection = con;
-            con.Open();
-            SqlDataReader rdr6 = cmd.ExecuteReader();
+            con.Open(); 
+            SqlDataReader rdr6 = cmd6.ExecuteReader();
             while (rdr6.Read())
             {
-                Console.WriteLine($" {rdr6[1]} ");
+                Console.WriteLine($" CustomerID:{rdr6[0]}\t Name:{rdr6[1]}\t ProductID:{rdr6[2]}\t No.of.Products:{rdr6[3]}\t Total Bill Amount:{rdr6[4]}\t SupplierId:{rdr6[5]} ");
             }
             con.Close();
             Console.ReadLine();
