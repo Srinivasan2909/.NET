@@ -1,0 +1,12 @@
+﻿@model dropdown.Models.state
+<option>SElect State</option>
+@if (ViewBag.abcd != null)
+{
+    foreach (var item in ViewBag.abcd)
+    {
+        <option value="@item">@item.Text</option>
+    }
+}
+
+
+
