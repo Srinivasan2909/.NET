@@ -1,0 +1,14 @@
+﻿@model onlinelist.Models.genre
+
+@{
+    ViewBag.Title = "Index2";
+}
+
+<h2>Index2</h2>
+<form method="post">
+    <label for="id">Genre</label>
+    @Html.DropDownList("id",ViewBag.genre as SelectList, "Select genre", new { @class = "form-control" })
+    <br />
+    <input type="submit" value="Okay!" />
+</form>
+

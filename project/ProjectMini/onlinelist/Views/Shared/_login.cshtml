@@ -1,0 +1,122 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <style>
+    .box{
+    margin-top: 60px;
+    margin-left: 200px;
+    padding: 25px;
+    border: 1px solid gray;
+    width: 720px;
+    height: 420px;
+    border-radius: 30px;
+    display: inline-flex;
+    margin-bottom: 0px;
+    }
+    .heading{
+    color: blue;
+    font-size: 30px;
+    text-transform: capitalize;
+    }
+    .with-spacing{
+    padding: 0px;
+    margin: 10px;
+    }
+    h6{
+    margin: 1px;
+    margin-bottom: 0px;
+    
+    }
+    .next{
+    background-color: rgb(116, 124, 243);
+    color: black;
+    text-transform: uppercase;
+
+    }
+    .no-underline{
+    text-decoration-line: none;
+    }
+    aside{
+    float: right;
+    width: 35%;
+    padding: 20px;
+    margin: 20px;
+    display: grid;
+    }
+    
+    .center{
+    align-content: center;
+    margin-top: 0px;
+    padding: 0px;
+}
+    .display-right{
+    text-align: right;
+
+}
+    .withgrid{
+    display: grid;
+}
+    section{
+    width: 60%;
+
+    }
+    </style>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content withgrid">
+        <div class="box">
+            <section>
+                <h1 class="heading"><span style="color: darkblue">R</span><span style="color: springgreen">e</span><span style="color: orangered">a</span><span style="color: yellow">d</span><span style="color:tomato">i</span><span style="color: rgb(218, 178, 69)">n</span></h1>
+                <h4>Sign-In to Your Readin Account</h4>
+                <br>
+                
+                @RenderBody()
+
+
+            </section>
+            <aside>
+                <img src="~/images/Capture.PNG" style="margin-left: 10px; width:200px; height:200px">
+                <h3 class="center" style="margin-left: 69px"><span style="color: darkblue">R</span><span style="color: springgreen">e</span><span style="color: orangered">a</span><span style="color: yellow">d</span><span style="color:tomato">i</span><span style="color: rgb(218, 178, 69)">n</span></h3>
+                <p class="center">One stop solution to digital reading</p>
+            </aside>
+            @*@RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>*@
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+</body>
+</html>

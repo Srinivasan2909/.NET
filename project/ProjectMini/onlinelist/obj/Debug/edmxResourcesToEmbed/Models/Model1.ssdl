@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="miniprojectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="booklist">
+    <Key>
+      <PropertyRef Name="book_id" />
+    </Key>
+    <Property Name="book_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="book_name" Type="varchar" MaxLength="40" />
+    <Property Name="author_name" Type="varchar" MaxLength="40" />
+    <Property Name="price" Type="int" />
+    <Property Name="genre_id" Type="int" />
+  </EntityType>
+  <EntityType Name="cart">
+    <Key>
+      <PropertyRef Name="serial_no" />
+    </Key>
+    <Property Name="serial_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="book_id" Type="int" />
+    <Property Name="book_name" Type="varchar" MaxLength="40" />
+    <Property Name="author_name" Type="varchar" MaxLength="40" />
+    <Property Name="price" Type="int" />
+    <Property Name="genre_id" Type="int" />
+    <Property Name="user_id" Type="int" />
+  </EntityType>
+  <EntityType Name="genre">
+    <Key>
+      <PropertyRef Name="genre_id" />
+    </Key>
+    <Property Name="genre_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="genre_name" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="LoginDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="14" />
+    <Property Name="password" Type="nvarchar" MaxLength="14" />
+  </EntityType>
+  <EntityType Name="UserBookDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookTitle" Type="nvarchar" MaxLength="30" />
+    <Property Name="AuthorName" Type="nvarchar" MaxLength="24" />
+    <Property Name="userId" Type="int" />
+    <Property Name="sub_date" Type="date" />
+  </EntityType>
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LoginID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="24" />
+    <Property Name="EmailId" Type="nvarchar" MaxLength="24" />
+    <Property Name="Phone_no" Type="bigint" />
+  </EntityType>
+  <Association Name="FK__booklist__genre___398D8EEE">
+    <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+    <End Role="booklist" Type="Self.booklist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="genre">
+        <PropertyRef Name="genre_id" />
+      </Principal>
+      <Dependent Role="booklist">
+        <PropertyRef Name="genre_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cart__book_id__6C190EBB">
+    <End Role="booklist" Type="Self.booklist" Multiplicity="0..1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="booklist">
+        <PropertyRef Name="book_id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cart__genre_id__6D0D32F4">
+    <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="genre">
+        <PropertyRef Name="genre_id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="genre_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cart__user_id__6E01572D">
+    <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserBookD__userI__693CA210">
+    <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+    <End Role="UserBookDetails" Type="Self.UserBookDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserBookDetails">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserDetai__Login__66603565">
+    <End Role="LoginDetails" Type="Self.LoginDetails" Multiplicity="0..1" />
+    <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoginDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserDetails">
+        <PropertyRef Name="LoginID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="miniprojectModelStoreContainer">
+    <EntitySet Name="booklist" EntityType="Self.booklist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="genre" EntityType="Self.genre" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoginDetails" EntityType="Self.LoginDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserBookDetails" EntityType="Self.UserBookDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__booklist__genre___398D8EEE" Association="Self.FK__booklist__genre___398D8EEE">
+      <End Role="genre" EntitySet="genre" />
+      <End Role="booklist" EntitySet="booklist" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cart__book_id__6C190EBB" Association="Self.FK__cart__book_id__6C190EBB">
+      <End Role="booklist" EntitySet="booklist" />
+      <End Role="cart" EntitySet="cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cart__genre_id__6D0D32F4" Association="Self.FK__cart__genre_id__6D0D32F4">
+      <End Role="genre" EntitySet="genre" />
+      <End Role="cart" EntitySet="cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cart__user_id__6E01572D" Association="Self.FK__cart__user_id__6E01572D">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="cart" EntitySet="cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserBookD__userI__693CA210" Association="Self.FK__UserBookD__userI__693CA210">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="UserBookDetails" EntitySet="UserBookDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserDetai__Login__66603565" Association="Self.FK__UserDetai__Login__66603565">
+      <End Role="LoginDetails" EntitySet="LoginDetails" />
+      <End Role="UserDetails" EntitySet="UserDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="miniprojectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="booklist">
+    <Key>
+      <PropertyRef Name="book_id" />
+    </Key>
+    <Property Name="book_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="book_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="author_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="genre_id" Type="Int32" />
+    <NavigationProperty Name="genre" Relationship="Self.FK__booklist__genre___398D8EEE" FromRole="booklist" ToRole="genre" />
+    <NavigationProperty Name="carts" Relationship="miniprojectModel.FK__cart__book_id__6C190EBB" FromRole="booklist" ToRole="cart" />
+  </EntityType>
+  <EntityType Name="genre">
+    <Key>
+      <PropertyRef Name="genre_id" />
+    </Key>
+    <Property Name="genre_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="genre_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="booklists" Relationship="Self.FK__booklist__genre___398D8EEE" FromRole="genre" ToRole="booklist" />
+    <NavigationProperty Name="carts" Relationship="miniprojectModel.FK__cart__genre_id__6D0D32F4" FromRole="genre" ToRole="cart" />
+  </EntityType>
+  <Association Name="FK__booklist__genre___398D8EEE">
+    <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+    <End Role="booklist" Type="Self.booklist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="genre">
+        <PropertyRef Name="genre_id" />
+      </Principal>
+      <Dependent Role="booklist">
+        <PropertyRef Name="genre_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="miniprojectEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="booklists" EntityType="Self.booklist" />
+    <EntitySet Name="genres" EntityType="Self.genre" />
+    <AssociationSet Name="FK__booklist__genre___398D8EEE" Association="Self.FK__booklist__genre___398D8EEE">
+      <End Role="genre" EntitySet="genres" />
+      <End Role="booklist" EntitySet="booklists" />
+    </AssociationSet>
+    <EntitySet Name="carts" EntityType="miniprojectModel.cart" />
+    <EntitySet Name="LoginDetails" EntityType="miniprojectModel.LoginDetail" />
+    <EntitySet Name="UserBookDetails" EntityType="miniprojectModel.UserBookDetail" />
+    <EntitySet Name="UserDetails" EntityType="miniprojectModel.UserDetail" />
+    <AssociationSet Name="FK__cart__book_id__6C190EBB" Association="miniprojectModel.FK__cart__book_id__6C190EBB">
+      <End Role="booklist" EntitySet="booklists" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cart__genre_id__6D0D32F4" Association="miniprojectModel.FK__cart__genre_id__6D0D32F4">
+      <End Role="genre" EntitySet="genres" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cart__user_id__6E01572D" Association="miniprojectModel.FK__cart__user_id__6E01572D">
+      <End Role="UserDetail" EntitySet="UserDetails" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserDetai__Login__66603565" Association="miniprojectModel.FK__UserDetai__Login__66603565">
+      <End Role="LoginDetail" EntitySet="LoginDetails" />
+      <End Role="UserDetail" EntitySet="UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserBookD__userI__693CA210" Association="miniprojectModel.FK__UserBookD__userI__693CA210">
+      <End Role="UserDetail" EntitySet="UserDetails" />
+      <End Role="UserBookDetail" EntitySet="UserBookDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="cart">
+    <Key>
+      <PropertyRef Name="serial_no" />
+    </Key>
+    <Property Name="serial_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="book_id" Type="Int32" />
+    <Property Name="book_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="author_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="genre_id" Type="Int32" />
+    <Property Name="user_id" Type="Int32" />
+    <NavigationProperty Name="booklist" Relationship="miniprojectModel.FK__cart__book_id__6C190EBB" FromRole="cart" ToRole="booklist" />
+    <NavigationProperty Name="genre" Relationship="miniprojectModel.FK__cart__genre_id__6D0D32F4" FromRole="cart" ToRole="genre" />
+    <NavigationProperty Name="UserDetail" Relationship="miniprojectModel.FK__cart__user_id__6E01572D" FromRole="cart" ToRole="UserDetail" />
+  </EntityType>
+  <EntityType Name="LoginDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserDetails" Relationship="miniprojectModel.FK__UserDetai__Login__66603565" FromRole="LoginDetail" ToRole="UserDetail" />
+  </EntityType>
+  <EntityType Name="UserBookDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="AuthorName" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="userId" Type="Int32" />
+    <Property Name="sub_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="UserDetail" Relationship="miniprojectModel.FK__UserBookD__userI__693CA210" FromRole="UserBookDetail" ToRole="UserDetail" />
+  </EntityType>
+  <EntityType Name="UserDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LoginID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="EmailId" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="Phone_no" Type="Int64" />
+    <NavigationProperty Name="carts" Relationship="miniprojectModel.FK__cart__user_id__6E01572D" FromRole="UserDetail" ToRole="cart" />
+    <NavigationProperty Name="LoginDetail" Relationship="miniprojectModel.FK__UserDetai__Login__66603565" FromRole="UserDetail" ToRole="LoginDetail" />
+    <NavigationProperty Name="UserBookDetails" Relationship="miniprojectModel.FK__UserBookD__userI__693CA210" FromRole="UserDetail" ToRole="UserBookDetail" />
+  </EntityType>
+  <Association Name="FK__cart__book_id__6C190EBB">
+    <End Type="miniprojectModel.booklist" Role="booklist" Multiplicity="0..1" />
+    <End Type="miniprojectModel.cart" Role="cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="booklist">
+        <PropertyRef Name="book_id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cart__genre_id__6D0D32F4">
+    <End Type="miniprojectModel.genre" Role="genre" Multiplicity="0..1" />
+    <End Type="miniprojectModel.cart" Role="cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="genre">
+        <PropertyRef Name="genre_id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="genre_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cart__user_id__6E01572D">
+    <End Type="miniprojectModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+    <End Type="miniprojectModel.cart" Role="cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserDetai__Login__66603565">
+    <End Type="miniprojectModel.LoginDetail" Role="LoginDetail" Multiplicity="0..1" />
+    <End Type="miniprojectModel.UserDetail" Role="UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoginDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserDetail">
+        <PropertyRef Name="LoginID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserBookD__userI__693CA210">
+    <End Type="miniprojectModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+    <End Type="miniprojectModel.UserBookDetail" Role="UserBookDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserBookDetail">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d37388b0847d416988d7f54b5c34c27b" Name="Diagram1">
+        <EntityTypeShape EntityType="miniprojectModel.booklist" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="miniprojectModel.genre" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="miniprojectModel.FK__booklist__genre___398D8EEE" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="miniprojectModel.cart" Width="1.5" PointX="5.625" PointY="3.625" />
+        <EntityTypeShape EntityType="miniprojectModel.LoginDetail" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="miniprojectModel.UserBookDetail" Width="1.5" PointX="5.25" PointY="10.625" />
+        <EntityTypeShape EntityType="miniprojectModel.UserDetail" Width="1.5" PointX="3" PointY="6.75" />
+        <AssociationConnector Association="miniprojectModel.FK__cart__book_id__6C190EBB" />
+        <AssociationConnector Association="miniprojectModel.FK__cart__genre_id__6D0D32F4" />
+        <AssociationConnector Association="miniprojectModel.FK__cart__user_id__6E01572D" />
+        <AssociationConnector Association="miniprojectModel.FK__UserDetai__Login__66603565" />
+        <AssociationConnector Association="miniprojectModel.FK__UserBookD__userI__693CA210" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

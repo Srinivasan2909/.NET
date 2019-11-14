@@ -1,0 +1,61 @@
+﻿@model IEnumerable<onlinelist.Models.booklist>
+
+@{
+    ViewBag.Title = "Display";
+}
+
+<h2>Display</h2>
+<form method="post">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.book_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.author_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.genre.genre_name)
+            </th>
+            <th>
+                Tick if you want this book!
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.book_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.author_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.genre.genre_name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.book_id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.book_id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.book_id })
+                </td>
+                <td>
+                    <input type="checkbox"  name="def" value="@item.book_id" />
+
+                </td>
+            </tr>
+        }
+
+    </table>
+    <input type="submit" value="submit" />
+</form>
